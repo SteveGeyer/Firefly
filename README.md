@@ -3,17 +3,18 @@
 # The Firefly Challenge
 
 The Firefly Challenge is an autonomous drone competition designed
-around safe and low-cost hardware. Our hope is to provide a fun venue
-that supports the development of clever autonomous flight software. We
-know from experience that a lot of the real enjoyment will be from the
-many screw-ups and failures we will have. We hope you decide to join
-the fun.
+around low-cost hardware. Our hope is to provide a fun venue that
+supports the development of clever autonomous flight software. We know
+from experience that a lot of the real enjoyment will be from the many
+screw-ups and failures we will have. We hope you decide to join the
+fun.
 
-The design is based on Tiny Whoop drones which are safe around humans,
-low cost, supply first person video (FPV) and can be commanded
-autonomously. The autonomy is supplied by a ground station that takes
-in the drone's FPV, processes the video to determine a course of
-action and then commands the drone to fly along the correct path.
+The design is based on Tiny Whoop quadcopters which are generally safe
+around humans, low cost, supply first person video (FPV) and can be
+commanded autonomously. The autonomy is supplied by a ground station
+that takes in the drone's FPV, processes the video to determine a
+course of action and then commands the drone to fly along the correct
+path.
 
 This project is open source and currently under development. Over time
 we hope to develop complete and mature hardware/software systems
@@ -39,7 +40,7 @@ as the AlphaPilot Challenge except:
 * No Internet glory
 * A lot more fun because you can actually compete in the Firefly
   Challenge whereas the Lockheed AlphaPilot Challenge is very hard, if
-  not toally impossible, for you to compete in
+  not totally impossible, for you to compete in
 
 
 # The Hardware Components
@@ -58,7 +59,7 @@ it is possibly to use less expensive components (say a cheaper drone
 or a Raspberry Pi) and lower the cost to about $190.
 
 The complete hardware list can be found [here](docs/Hardware.md) with
-setup instructions [here](docs/NanoSetup.md)
+setup instructions [here](docs/NanoSetup.md).
 
 While we will document how to purchase and set up the solution shown,
 we welcome any system that can fly a Tiny Whoop in a competition.
