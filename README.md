@@ -9,21 +9,22 @@ know from experience that a lot of the real enjoyment will be from the
 many screw-ups and failures we will have. We hope you decide to join
 the fun.
 
-The contest is based on Tiny Whoop drones which are safe around
-humans, low cost, supply first person video (FPV) and can be commanded
+The design is based on Tiny Whoop drones which are safe around humans,
+low cost, supply first person video (FPV) and can be commanded
 autonomously. The autonomy is supplied by a ground station that takes
 in the drone's FPV, processes the video to determine a course of
 action and then commands the drone to fly along the correct path.
 
-Over time we hope to develop complete and mature hardware/software
-systems autonomously controlling drones.
+This project is open source and currently under development. Over time
+we hope to develop complete and mature hardware/software systems
+autonomously controlling drones.
 
-This project is open source and currently under development. This repo
-outlines a complete hardware solution along with ideas and suggestions
-on alternatives. It will also supply the necessary software to race on
-a predefined course. We are hoping people will take this work and
-extend it. Extra credit will be for those who submit updates to the
-hardware and software designs or create and document alternatives.
+This repo outlines a complete hardware solution along with ideas and
+suggestions on alternatives. It will also supply the necessary
+software to race on a predefined course. We are hoping people will
+take this work and extend it. Extra credit will be for those who
+submit updates to the hardware and software designs or create and
+document alternatives.
 
 This effort was inspired by the
 [Lockheed Martin AlphaPilot Challenge](https://www.lockheedmartin.com/en-us/news/events/ai-innovation-challenge.html).
@@ -44,7 +45,7 @@ as the AlphaPilot Challenge except:
 # The Hardware Components
 
 The picture at the top of this page shows all the necessary components
-to fly in a contest. This picture is one of our actual systems as
+to fly in a competition. This picture is one of our actual systems as
 demonstrated by the rubber band to holding the Multi-Protocol
 Transmitter Module to an Arduino. We should probably spec and use a
 more reliable mounting technique.
@@ -52,22 +53,25 @@ more reliable mounting technique.
 This picture is only one possible hardware solution. Any of the
 components shown can be swapped for other hardware to meet individual
 needs or budget. In August of 2019 you would spend approximately $335
-to purchase the hardware shown in the picture on Amazon.com. However, it
-is possibly to use less expensive components (say a cheaper drone or a
-Raspberry Pi) and lower the cost to about $190.
+to purchase the hardware shown in the picture on Amazon.com. However,
+it is possibly to use less expensive components (say a cheaper drone
+or a Raspberry Pi) and lower the cost to about $190.
+
+The complete hardware list can be found [here](docs/Hardware.md) with
+setup instructions [here](docs/NanoSetup.md)
 
 While we will document how to purchase and set up the solution shown,
-we welcome any system that can fly a Tiny Whoop in a contest.
+we welcome any system that can fly a Tiny Whoop in a competition.
 
 
 # How it Works
 
 At the top of the picture is a **Tiny Whoop Drone**. This is what we
-fly in the contests. This drone has a First Person Video (FPV) camera
-that points forward. You can see the front of the camera as the small
-black lens sitting between the bottom two propellors. Once the drone
-is powered up the camera starts broadcasting a video stream on a 5.8
-GHz video channel.
+fly in the competitions. This drone has a First Person Video (FPV)
+camera that points forward. You can see the front of the camera as the
+small black lens sitting between the bottom two propellors. Once the
+drone is powered up the camera starts broadcasting a video stream on a
+5.8 GHz video channel.
 
 The FPV video being broadcasted is captured by the **FPV Video
 Capture** box. It is then transferred to the **NVIDIA Nano** over a
