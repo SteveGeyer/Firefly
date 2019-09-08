@@ -32,7 +32,7 @@ This effort was inspired by the
 We would like to think that the Firefly Challenge is exactly the same
 as the AlphaPilot Challenge except:
 
-* Safe for all participants and spectators
+* Safe for participants and spectators
 * Low-cost hardware based on easy to buy components
 * Testing and competition happen in small and inexpensive venues
 * Dumb drones controlled by smart ground stations

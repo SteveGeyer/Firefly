@@ -1,13 +1,13 @@
 # Hardware
 
 There are many ways to build and compete in the Firefly Challenge. The
-hardware outlined here is what we have chosen. We know this
-configuration works as a complete system. However you are welcome to
-change any or all of these components.
+hardware outlined here is a configuration known to work as a complete
+system. However you are welcome to change any or all of these
+components.
 
 You can get all of these components from multiple vendors and it pays
-to shop around. For convenience will supply Amazon links and prices at
-the time of this writing (August 2019).
+to shop around. For convenience this document will supply Amazon links
+and prices at the time of this writing (August 2019).
 
 ## Tiny Whoop
 
@@ -32,13 +32,14 @@ hardware and software. If you do this please share your configuration
 and experience with us to add to the list of supported hardware.
 
 | Part                                                                                                      | Cost |
-| --- | --- |
+| --- | ---: |
 |[BETAFPV Beta65 Pro 2 Frsky 2S Brushless Tiny Whoop](https://www.amazon.com/gp/product/B07MNG2J6D)|$99.99|
 |[BETAFPV battery charger](https://www.amazon.com/BETAFPV-Charger-Board-Battery-Adapter/dp/B072BXBSX5)|$29.99|
 |[Additional BETAFPV batteries](https://www.amazon.com/BETAFPV-Battery-Powerwhoop-Connector-Inductrix/dp/B07FFTVB8C)|$27.59|
 
 
 ## NVIDIA Jetson Nano
+<img align="right" width=200 src="nano.png" />
 
 To perform image processing and make flight path decisions we are
 using an NVIDIA Nano. We decided to use an external 4 amp power supply
@@ -53,7 +54,7 @@ installing OpenCV. You can either use screws or small zip ties to
 attach the fan to the heatsink.
 
 | Part                                                                                                      | Cost |
-| --- | --- |
+| --- | ---: |
 |[NVIDIA Jetson Nano Developer Kit](https://www.amazon.com/gp/product/B07PZHBDKT)|$99.00|
 |[SMAKN DC 5V/4A 20W Switching Power Supply](https://www.amazon.com/gp/product/B01N4HYWAM)|$8.99|
 |[Samsung 128GB MicroSDXC Memory Card](https://www.amazon.com/gp/product/B06XWZWYVP)|$19.99|
@@ -61,18 +62,8 @@ attach the fan to the heatsink.
 |[Noctua NF-A4x20 5V PWM, Premium Quiet Fan](https://www.amazon.com/gp/product/B071FNHVXN)|$14.95|
 
 
-## FPV Video Receiver
-
-To capture the first person video coming from the quadcopter we use a
-FPV receiver. This converted the video into a digital signal and send
-to to the computer over USB.
-
-| Part                                                                                                      | Cost |
-| --- | --- |
-|[EACHINE ROTG02 FPV Receiver](https://www.amazon.com/gp/product/B07NNH93NX)|$36.99|
-
-
 ## Multi-protocol Transmitter
+<img align="right" width=200 src="transmitter.png" />
 
 To command the quadcopter's flight path we use a Multi-protocol
 Transmitter module. The module we use requires a 5V serial signal. To
@@ -85,6 +76,17 @@ Right now we are only supporting Frsky, but this hardware can command
 most types of quadcopters on the market today.
 
 | Part                                                                                                      | Cost |
-| --- | --- |
+| --- | ---: |
 |[4-in-1 2.4G Mutlti-Protocol Transmitter Module](https://www.amazon.com/ARRIS-Jumper-Mutltiprotocol-Transmitter-Module/dp/B07D76QRNS)|$59.98|
 |[Arduino Leonardo](https://www.amazon.com/Solu-Leonardo-Compatible-Revision-Atmega32u4)|$9.99|
+
+## FPV Video Receiver
+<img align="right" width=200 src="receive.png" />
+
+To capture the first person video coming from the quadcopter we use a
+FPV receiver. This converted the video into a digital signal and send
+to to the computer over USB.
+
+| Part                                                                                                      | Cost |
+| --- | ---: |
+|[EACHINE ROTG02 FPV Receiver](https://www.amazon.com/gp/product/B07NNH93NX)|$36.99|

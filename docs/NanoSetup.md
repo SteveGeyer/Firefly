@@ -83,10 +83,72 @@ Edit `install_opencv4.1.0_Nano.sh` and globally replace 4.0.0 with 4.1.0.
 Finally create a directory to build in and start the script:
 
 ```
-mkdir ~/opencv4.1.0
-./install_opencv4.1.0_Nano.sh ~/opencv4.1.0
+mkdir ~/opencv
+./install_opencv4.1.0_Nano.sh ~/opencv
 ```
 
 The build and install process takes several hours to complete. You
 will also notice that the external fan will come on at various times
 during this process.
+
+# Camera calibration
+
+This is a good time to build the camera calibration code.  Following
+the instructions
+[here](https://docs.opencv.org/4.1.0/d4/d94/tutorial_camera_calibration.html)
+we need to build the calibration program. In OpenCV's sample directory
+is this program and it takes live video or a series of images from the
+camera and infers the distortion coming from the camera.
+
+Unfortunately you need to do several steps to get this executable
+built. OpenCV 4.0 no longer creates the necessary information for
+`pkg-config` eliminating the possibility of a simple, one-line,
+command to build camera_calibration in its source directory. We must
+instead us `cmake`. So we are going to copy the source into a
+temporary directory, create the `CMakeLists.txt` and `default.xml`
+file, build and finally calibrate.
+
+If you checkout this repository to your Nano you can skip the setup
+sets follow the build steps below.
+
+## Setup
+
+Start by copying the source code into a working directory. This
+example chooses the directory `~/calibrate`.
+
+```
+cp -r ~/opencv/opencv-4.1.0/samples/cpp/tutorial_code/calib3d/camera_calibration ~/calibrate
+```
+
+Create file `~/calibrate/CMakeLists.txt` and populate with:
+```
+cmake_minimum_required(VERSION 3.0)
+project(camera_calibration)
+find_package(OpenCV REQUIRED)
+add_executable(camera_calibration camera_calibration.cpp)
+target_link_libraries(camera_calibration ${OpenCV_LIBS})
+```
+
+Then copy `~/calibrate/in_VID5.xml` to `~/calibrate/default.xml` and
+edit for your particle training choice. In this example we will
+capture the images live from the camera and device location 0. So we
+edit the `<Input>` to be zero `<Input>"0"</Input>`. Notice the quotes
+around the 0, they seem to be required.
+
+## Build
+
+Now build it.
+
+```
+cd ~/calibrate
+mkdir build
+cd build
+cmake ..
+make
+```
+
+## Run camera_calibration
+
+At this time follow the instructions on using the calibration program
+as described
+[here](https://docs.opencv.org/4.1.0/d4/d94/tutorial_camera_calibration.html).
