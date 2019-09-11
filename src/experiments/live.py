@@ -12,6 +12,57 @@ __status__ = "Development"
 import argparse
 import cv2
 import pose
+import command
+
+class Fly:
+    """Basic flying code."""
+
+    def __init__(self, ttyname, marker_id):
+        """Initialize the flying code."""
+        self.pose = pose.Pose()
+        self.cmd = command.Command(ttyname)
+        self.marker_id = marker_id
+        self.flying = False
+        self.armed = False
+
+    def process(self, frame):
+        """Process new frame, update flight parameters, and return results."""
+        self.pose.solve(frame, self.marker_id)
+        results = self.pose.display_results()
+        return results
+
+    def bind(self):
+        """Bind to quadcopter"""
+        self.cmd.bind()
+        self.armed = False
+
+    def arm(self):
+        """Arm quadcopter for flight"""
+        self.cmd.arm()
+        self.armed = True
+
+    def start_flying(self):
+        """Start flying the quadcopter"""
+        if self.armed:
+            self.flying = True
+        else:
+            print("Must be armed first to fly")
+
+    def stop_flying(self):
+        """Disarm and stop quadcopter"""
+        self.flying = False
+        self.cmd.disarm()
+        self.armed = False
+
+
+def interactive_help():
+    """Print interactive help"""
+    print('a    -- arm the quadcopter for flight')
+    print('d, s -- disarm and stop flying\n')
+    print('f    -- fly!\n')
+    print('b    -- bind the quadcopter\n')
+    print('q    -- quit program')
+    print('h, ? -- this help')
 
 def main():
     """Execute the command"""
@@ -20,15 +71,18 @@ def main():
     parser.add_argument('-i', '--id',
                         help='marker ID to find',
                         required=False, type=int, default=2)
+    parser.add_argument('-t', '--ttyname',
+                        help='Serial tty to transmitter.',
+                        required=False,
+                        default='/dev/ttyACM0')
     args = parser.parse_args()
 
+    fly = Fly(args.ttyname, args.id)
     image_count = 0
     cap = cv2.VideoCapture(0)
-    p = pose.Pose()
     while True:
         _, frame = cap.read()
-        p.solve(frame, args.id)
-        results = p.display_results()
+        results = fly.process(frame)
         cv2.imshow('frame', results)
         ch = cv2.waitKey(1) & 0xFF
         if ch == ord('c'):
@@ -43,7 +97,22 @@ def main():
             else:
                 print("Error writing %s" % name)
             image_count += 1
-        if ch == ord('q'):
+        if ch == ord('b'):
+            print('binding...')
+            fly.bind()
+            print('  done')
+        elif ch == ord('a'):
+            fly.arm()
+            print('armed')
+        elif ch == ord('d') or ch == ord('s'):
+            fly.stop_flying()
+            print('stop flying')
+        elif ch == ord('f'):
+            print('start flying')
+            fly.start_flying()
+        elif ch == ord('h') or ch == ord('?'):
+            interactive_help()
+        elif ch == ord('q'):
             break
 
     cap.release()

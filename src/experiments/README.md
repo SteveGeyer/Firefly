@@ -12,12 +12,16 @@ This directory holds code for various experiments on analysis.
 │   ├── ...
 │   └── raw_image_8.png
 │
-├── batch.py             -- Analyze the images in 'images'.
+├── batch.py             -- Analyze the images in 'images' and calculate pose.
+├── drive.py             -- Test drive the command library to fly quadcopter.
 ├── live.py              -- Live video version pose detection.
 ├── makearuco.py         -- Create Aruco fiducial markers.
-├── oneimage.py          -- Process one image.
-├── pose.py              -- Pose library.
-└── save_calibration.py  -- Create 'calibration.npz'.
+├── oneimage.py          -- Process one image with pose detection.
+├── save_calibration.py  -- Create 'calibration.npz'.
+│
+├── command.py           -- Command the quadcopter transmitter.
+├── pid.py               -- PID library.
+└── pose.py              -- Pose library.
 ```
 
 ## Images

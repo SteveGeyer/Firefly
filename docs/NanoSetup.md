@@ -111,6 +111,17 @@ file, build and finally calibrate.
 If you checkout this repository to your Nano you can skip the setup
 sets follow the build steps below.
 
+## Quadcopter On Screen Display
+
+Before running the camera calibration it might be a good idea to
+disable the On Screen Display (OSD). This will give the image process
+the maximum ability to process the incoming image without having any
+part of the image obscured.
+
+If you controller is using BetaFlight it is as easy as connecting the
+quadcopter to your computer running the BetaFlight Configurator,
+clicking the OSD tab, disabling all OSD outputs, and hitting save.
+
 ## Setup
 
 Start by copying the source code into a working directory. This
@@ -152,3 +163,53 @@ make
 At this time follow the instructions on using the calibration program
 as described
 [here](https://docs.opencv.org/4.1.0/d4/d94/tutorial_camera_calibration.html).
+
+# Load packages
+
+## screen to testing
+
+```
+sudo apt-get install screen
+```
+
+## Pip and then pyserial
+
+NEED TO DOUBLE CHECK THIS ON A FRESHLY install flash drive. First make sure that
+
+The `pyserial` package need to be installed so that we can command the
+transmitter. First we will install the `pip` command.
+
+```
+wget https://bootstrap.pypa.io/get-pip.py
+sudo python3 get-pip.py
+rm get-pip.py
+```
+
+Next install `pyserial`:
+
+```
+pip3 install pyserial
+```
+
+or maybe
+
+```
+sudo pip3 install pyserial
+```
+
+Now test that it is installed
+
+```
+python3
+>>> import serial
+```
+
+
+# Add user to dialout group
+
+We need to add the user to the `dialout` group so that they can open a
+serial line without requiring root permissions:
+
+```
+sudo usermod -a -G dialout $USER
+```
