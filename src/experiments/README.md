@@ -18,6 +18,7 @@ This directory holds code for various experiments on analysis.
 ├── makearuco.py         -- Create Aruco fiducial markers.
 ├── oneimage.py          -- Process one image with pose detection.
 ├── save_calibration.py  -- Create 'calibration.npz'.
+├── testpid.py           -- Run the PID library and output results.
 │
 ├── command.py           -- Command the quadcopter transmitter.
 ├── pid.py               -- PID library.

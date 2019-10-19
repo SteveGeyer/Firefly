@@ -2,7 +2,7 @@
 
 This will describe the one step by step process you can use to setup
 an NVIDIA Nano for the Firefly challenge. It tries to be complete and
-explain the rationale for the choices made.
+while explaining the rationale for the choices made.
 
 If you are using a Edimax ew-7811un USB Wifi then insert it into the
 USB port now. If you are using another networking option then connect
@@ -10,10 +10,14 @@ it. We want this done early because if there is a network connection
 available during the standard NVIDIA setup, it will initialize the
 connection and update some software. This is a good thing to do.
 
+If you can connect the device directly to the router through an
+ethernet connection this will likely speed up some of the steps during
+setup.
+
 We decided to use an external 4 amp power supply since we plan to
-power several USB devices directly from the Nano and to push the GPU
-hard. Before this supply will work you must insert a jumper on
-J48. You can find more instructions
+power several USB devices directly from the Nano and we also plan to
+push the GPU hard. To get this supply will work you must insert a
+jumper on J48. You can find more instructions
 [here](https://devtalk.nvidia.com/default/topic/1048640/jetson-nano/power-supply-considerations-for-jetson-nano-developer-kit/).
 
 Similarly, because we plan to push the GPU hard we suggest adding an
@@ -25,8 +29,7 @@ With the hardware set up complete, begin by following NVIDIA's official
 [Getting Started With Jetson Nano Developer Kit](https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit).
 
 When using Edimax ew-7811un we have noticed it dropping connections as
-discussed
-[here](https://devtalk.nvidia.com/default/topic/1049303/jetson-nano/jetson-nano-wifi-/post/5329699/#5329699).
+discussed [here](https://devtalk.nvidia.com/default/topic/1049303/jetson-nano/jetson-nano-wifi-/post/5329699/#5329699).
 You might want to deal the the dropping connections early in your
 setup and then reboot. We followed their recommended procedure of
 adding the rtl8192cu driver to the blacklist. Open up a terminal and
@@ -39,10 +42,10 @@ echo "blacklist rtl8192cu" | sudo tee -a /etc/modprobe.d/blacklist.conf
 
 ## Installing OpenCV 4.1.0
 
-This following step installs a reasonably current version of OpenCV
-and most important the contrib library which contains the Aruco
-fiducial marker detector. The version pre-installed by NVIDIA lacks
-both the contrib directory and Aruco in particular.
+The following step installs a reasonably current version of OpenCV and
+most important the contrib library which contains the Aruco fiducial
+marker detector. The version of OpenCV pre-installed by NVIDIA lacks
+both the contrib directory and Aruco.
 
 To install OpenCV 4.1.0 follow the plan outlined on this
 [page](https://devtalk.nvidia.com/default/topic/1049296/jetson-nano/how-to-install-opencv-python-for-python3-6/2).
@@ -78,7 +81,8 @@ cd JEP/script
 cp install_opencv4.0.0_Nano.sh install_opencv4.1.0_Nano.sh
 ```
 
-Edit `install_opencv4.1.0_Nano.sh` and globally replace 4.0.0 with 4.1.0.
+Edit `install_opencv4.1.0_Nano.sh` and globally replace the string
+4.0.0 with 4.1.0.
 
 Finally create a directory to build in and start the script:
 
@@ -102,11 +106,11 @@ camera and infers the distortion coming from the camera.
 
 Unfortunately you need to do several steps to get this executable
 built. OpenCV 4.0 no longer creates the necessary information for
-`pkg-config` eliminating the possibility of a simple, one-line,
-command to build camera_calibration in its source directory. We must
-instead us `cmake`. So we are going to copy the source into a
-temporary directory, create the `CMakeLists.txt` and `default.xml`
-file, build and finally calibrate.
+`pkg-config` eliminating the possibility of a simple one-line command
+to build camera_calibration in its source directory. We must instead
+use `cmake`. So we are going to copy the source into a temporary
+directory, create the `CMakeLists.txt` and `default.xml` file, build
+and finally calibrate.
 
 If you checkout this repository to your Nano you can skip the setup
 sets follow the build steps below.
@@ -174,7 +178,7 @@ sudo apt-get install screen
 
 ## Pip and then pyserial
 
-NEED TO DOUBLE CHECK THIS ON A FRESHLY install flash drive. First make sure that
+NEED TO DOUBLE CHECK THIS ON A FRESHLY install flash drive.
 
 The `pyserial` package need to be installed so that we can command the
 transmitter. First we will install the `pip` command.

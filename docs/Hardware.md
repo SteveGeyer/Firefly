@@ -23,13 +23,14 @@ including Tiny Whoops. You need to factor in human safety into all of
 your plans for testing and in competitions.
 
 There an many tens of different Tiny Whoops to choose from and while
-the spec'ed system can support many of them you will need to make sure
-the quadcopter's command protocol is compatible with the hardware you
-choose. We have chosen the BETAFPV for our initial quadcopter and that
-means we are supporting the Frsky protocol. If you choose a quadcopter
-using a different protocol you may have to make modifications to your
-hardware and software. If you do this please share your configuration
-and experience with us to add to the list of supported hardware.
+the spec'ed radio system can support many of them you will need to
+make sure the quadcopter's command protocol is compatible with the
+hardware you choose. We have chosen the BETAFPV for our initial
+quadcopter and that means we are supporting the Frsky protocol. If you
+choose a quadcopter using a different protocol you may have to make
+modifications to your hardware and software. If you do this please
+share your configuration and experience with us to add to the list of
+supported hardware.
 
 | Part                                                                                                      | Cost |
 | --- | ---: |
