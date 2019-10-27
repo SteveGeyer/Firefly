@@ -79,7 +79,7 @@ most types of quadcopters on the market today.
 | Part                                                                                                      | Cost |
 | --- | ---: |
 |[4-in-1 2.4G Mutlti-Protocol Transmitter Module](https://www.amazon.com/ARRIS-Jumper-Mutltiprotocol-Transmitter-Module/dp/B07D76QRNS)|$59.98|
-|[Arduino Leonardo](https://www.amazon.com/Solu-Leonardo-Compatible-Revision-Atmega32u4)|$9.99|
+|[Arduino Leonardo](https://www.amazon.com/Solu-Leonardo-Compatible-Revision-Atmega32u4/dp/B00R237VGO)|$9.99|
 
 ## FPV Video Receiver
 <img align="right" width=200 src="receive.png" />
