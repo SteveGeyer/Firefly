@@ -19,9 +19,11 @@ const uint16_t minValue = 0x0CC; // Minimum value supported.
 const uint16_t midValue = 0x400; // Middle value supported.
 const uint16_t maxValue = 0x733; // Maximum value supported.
 
-const int bindTimeOut = 100;    // Number of ticks in bind.
-const int disarmTimeOut = 100;  // Number of ticks in disarm.
-const int armTimeOut = 100;     // Number of ticks in arm.
+const int basicTimeout = 100;   // Basic number to use for timeout.
+
+const int bindTimeOut   = basicTimeout; // Number of ticks in bind.
+const int disarmTimeOut = basicTimeout; // Number of ticks in disarm.
+const int armTimeOut    = basicTimeout; // Number of ticks in arm.
 
 typedef enum {
     BIND,                       // Binding the transmitter to receiver.
@@ -91,6 +93,7 @@ static uint16_t data[numChannels]; // Data channels.
 
 const int debugSize = 100;
 static char lastOutput[debugSize];
+static bool debugOutput = false;
 
 static void     setDefaultParams();
 static void     processCommand();
@@ -226,8 +229,12 @@ static void processSingleChar(char ch) {
         spin -= paramDelta;
     } else if ((ch == '\r') || (ch == '\n')) {
         // Do nothing.
+    } else if (ch == 'D') {
+        debugOutput = !debugOutput;
     } else {
-        Serial.print("ch: ");
+        Serial.print("Unknown command: '");
+        Serial.print(ch);
+        Serial.print("' - ");
         Serial.print((ch >> 4) & 0xF, HEX);
         Serial.println(ch & 0xF, HEX);
     }
@@ -292,9 +299,12 @@ static void sportProcessPacket() {
         return;
     }
 
-    uint16_t sensorID = rxBuf[3] << 8 | rxBuf[2];
-    int32_t value = (rxBuf[7] << 24) | (rxBuf[6] << 16) |
-        (rxBuf[5] << 8) | rxBuf[4];
+    uint16_t sensorID = ((uint16_t)rxBuf[3]) << 8 | ((uint16_t)rxBuf[2]);
+    int32_t value =
+        (((uint32_t)rxBuf[7]) << 24) |
+        (((uint32_t)rxBuf[6]) << 16) |
+        (((uint32_t)rxBuf[5]) << 8) |
+        ((uint32_t)rxBuf[4]);
 
     if ((sensorID != ACCX_FIRST_ID) &&
         (sensorID != ACCY_FIRST_ID) &&
@@ -302,7 +312,7 @@ static void sportProcessPacket() {
         return;
     }
 
-    char *name;
+    const char* name = "";
     switch (sensorID) {
         case ACCX_FIRST_ID: name = "X"; break;
         case ACCY_FIRST_ID: name = "Y"; break;
@@ -420,7 +430,9 @@ static void sendPacket() {
     sendByte(0x03);
     sendByte(0x00);
     sendData();
-    // debug();
+    if (debugOutput) {
+        debug();
+    }
     runState = nextState;
 }
 
@@ -439,7 +451,6 @@ static bool nextSample() {
 
 static void help() {
     Serial.println("Commands:");
-    Serial.println(" q -- bind");
     Serial.println(" a -- arm to flight");
     Serial.println(" d -- disarm and stop");
     Serial.println();
@@ -454,28 +465,22 @@ static void help() {
     Serial.println();
     Serial.println(" !<throttle> <left/right> <forward/back> <rotation> -- "
                    "command all parameters with values (204 to 1907)");
+    Serial.println();
+    Serial.println(" D -- toggle debugging output");
+    Serial.println();
 }
 
 static void debug() {
-    char *stateStr = "";
+    const char *stateStr = "";
     switch (runState) {
         default:
-        case BIND:
-            stateStr = "BIND";
-            break;
-        case DISARM_BEFORE_ARM:
-            stateStr = "DISARM_BEFORE_ARM";
-            break;
-        case ARM:
-            stateStr = "ARM";
-            break;
-        case RUN:
-            stateStr = "RUN";
-            break;
-        case DISARM:
-            stateStr = "DISARM";
-            break;
+        case BIND:              stateStr = "BIND";              break;
+        case DISARM_BEFORE_ARM: stateStr = "DISARM_BEFORE_ARM"; break;
+        case ARM:               stateStr = "ARM";               break;
+        case RUN:               stateStr = "RUN";               break;
+        case DISARM:            stateStr = "DISARM";            break;
     }
+
     char buf[debugSize];
     sprintf(buf, "%s arm:%d throttle:%d direction:%d forward:%d spin:%d",
             stateStr, data[armIndex], data[throttleIndex],
