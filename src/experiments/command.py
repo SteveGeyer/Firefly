@@ -10,11 +10,11 @@ __status__ = "Development"
 import time
 import serial
 
-MIN_VALUE = 204
-MAX_VALUE = 1844
-
 class Command:
     """Drive the transmitter to command the quadcopter."""
+
+    MIN_VALUE = 204
+    MAX_VALUE = 1844
 
     def __init__(self, ttyname):
         """Open serial using ttyname"""
@@ -45,7 +45,9 @@ class Command:
         self.serial.write(cmd)
 
 def normalize(value):
-    """Covert float into integer command value"""
-    return min(MAX_VALUE,
-               max(MIN_VALUE,
-                   value*(MAX_VALUE-MIN_VALUE) + MIN_VALUE))
+    """Covert float into integer command value.
+       -1.0 => MIN_VALUE through to 1.0 => MAX_VALUE."""
+    return min(Command.MAX_VALUE,
+               max(Command.MIN_VALUE,
+                   ((value+1.0)/2.0)*(Command.MAX_VALUE-Command.MIN_VALUE) +
+                   Command.MIN_VALUE))

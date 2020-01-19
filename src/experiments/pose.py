@@ -58,6 +58,7 @@ class Pose:
         self.runtime = 0        # Runtime of last solve.
         self.status = None      # Status information.
 
+
     def solve(self, frame, expected_id):
         """Solve for quadcopter pose"""
         e1 = cv2.getTickCount()
@@ -96,6 +97,13 @@ class Pose:
             result = draw_axis(result, imgpts)
             self.add_status(result)
         return result
+
+
+    def height(self):
+        if self.found:
+            return self.tvecs[1][0]
+        else:
+            return 0.0
 
 
     def add_status(self, result):

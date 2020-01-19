@@ -15,7 +15,7 @@ import pose
 
 def main():
     """Execute the command"""
-    parser = argparse.ArgumentParser(description='Save calibration data')
+    parser = argparse.ArgumentParser(description='Run pose processing algorithms over a single image')
     parser.add_argument('-i', '--id',
                         help='marker ID to find',
                         required=False, type=int, default=2)

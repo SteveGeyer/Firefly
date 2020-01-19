@@ -1,6 +1,20 @@
 #!/usr/bin/env python3
 
-"""Run pose processing algorithms over a live feed."""
+"""Run pose processing algorithms and drive the drone.
+
+You must have the output window active to process the commands which
+are each single letters.
+
+To fly you first must arm the drone using the 'a' command. In about a
+second the drone should start spinning it props.
+
+Type 'f' to start flying.
+
+Type 's' to start flying.
+
+Type 'q' to quit the program.
+
+"""
 
 __author__ = "Steve Geyer"
 __copyright__ = "Copyright 2019, Steve Geyer"
@@ -43,6 +57,7 @@ def main():
         cv2.imshow('frame', results)
         if not process_command(f, frame):
             break
+    f.stop_flying()
     cap.release()
     cv2.destroyAllWindows()
 

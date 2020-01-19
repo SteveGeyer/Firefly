@@ -67,7 +67,7 @@ def execute(c, text):
 def main():
     """Execute the command"""
 
-    parser = argparse.ArgumentParser(description='Save calibration data')
+    parser = argparse.ArgumentParser(description='Drive quadcopter from a command line')
     parser.add_argument('-t', '--ttyname',
                         help='Serial tty to transmitter.',
                         required=False,

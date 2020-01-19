@@ -40,14 +40,14 @@ echo "blacklist rtl8192cu" | sudo tee -a /etc/modprobe.d/blacklist.conf
 ```
 
 
-## Installing OpenCV 4.1.0
+## Installing OpenCV 4.1.1
 
 The following step installs a reasonably current version of OpenCV and
 most important the contrib library which contains the Aruco fiducial
 marker detector. The version of OpenCV pre-installed by NVIDIA lacks
 both the contrib directory and Aruco.
 
-To install OpenCV 4.1.0 follow the plan outlined on this
+To install OpenCV 4.1.1 follow the plan outlined on this
 [page](https://devtalk.nvidia.com/default/topic/1049296/jetson-nano/how-to-install-opencv-python-for-python3-6/2).
 
 First we need to create a large enough swap file and add it to the
@@ -68,27 +68,13 @@ Then enable swapfile after reboot, sudo edit `/etc/fstab` and add:
 /swapfile none swap 0 0
 ```
 
-Now get the OpenCV 4 install script:
-
-```
-git clone https://github.com/AastaNV/JEP
-```
-
-Copy the 4.0.0 into a 4.1.0:
-
-```
-cd JEP/script
-cp install_opencv4.0.0_Nano.sh install_opencv4.1.0_Nano.sh
-```
-
-Edit `install_opencv4.1.0_Nano.sh` and globally replace the string
-4.0.0 with 4.1.0.
-
-Finally create a directory to build in and start the script:
+Now get the OpenCV 4 install script and then build and install OpenCV:
 
 ```
 mkdir ~/opencv
-./install_opencv4.1.0_Nano.sh ~/opencv
+git clone https://github.com/AastaNV/JEP
+cd JEP/script
+./install_opencv4.1.1_Jetson.sh ~/opencv
 ```
 
 The build and install process takes several hours to complete. You
@@ -99,7 +85,7 @@ during this process.
 
 This is a good time to build the camera calibration code.  Following
 the instructions
-[here](https://docs.opencv.org/4.1.0/d4/d94/tutorial_camera_calibration.html)
+[here](https://docs.opencv.org/4.1.1/d4/d94/tutorial_camera_calibration.html)
 we need to build the calibration program. In OpenCV's sample directory
 is this program and it takes live video or a series of images from the
 camera and infers the distortion coming from the camera.
@@ -132,7 +118,7 @@ Start by copying the source code into a working directory. This
 example chooses the directory `~/calibrate`.
 
 ```
-cp -r ~/opencv/opencv-4.1.0/samples/cpp/tutorial_code/calib3d/camera_calibration ~/calibrate
+cp -r ~/opencv/opencv-4.1.1/samples/cpp/tutorial_code/calib3d/camera_calibration ~/calibrate
 ```
 
 Create file `~/calibrate/CMakeLists.txt` and populate with:
@@ -166,7 +152,7 @@ make
 
 At this time follow the instructions on using the calibration program
 as described
-[here](https://docs.opencv.org/4.1.0/d4/d94/tutorial_camera_calibration.html).
+[here](https://docs.opencv.org/4.1.1/d4/d94/tutorial_camera_calibration.html).
 
 # Load packages
 
@@ -190,12 +176,6 @@ rm get-pip.py
 ```
 
 Next install `pyserial`:
-
-```
-pip3 install pyserial
-```
-
-or maybe
 
 ```
 sudo pip3 install pyserial
