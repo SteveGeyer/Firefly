@@ -63,18 +63,22 @@ attach the fan to the heatsink.
 |[Noctua NF-A4x20 5V PWM, Premium Quiet Fan](https://www.amazon.com/gp/product/B071FNHVXN)|$14.95|
 
 
-## Multi-protocol Transmitter
+## Multi-Protocol Transmitter
 <img align="right" width=200 src="transmitter.png" />
 
-To command the quadcopter's flight path we use a Multi-protocol
+To command the quadcopter's flight path we use a Multi-Protocol
 Transmitter module. The module we use requires a 5V serial signal. To
 convert from the 5V signal into the USB needed by the NVIDIA Nano we
 use a Arduino Leonardo. The Leonardo is programed to translate the
 commands from the NVIDIA Nano into the correct signaling to the
-Multi-protocol Transmitter Module.
+Multi-Protocol Transmitter Module.
 
 Right now we are only supporting Frsky, but this hardware can command
 most types of quadcopters on the market today.
+
+This [page](Transmitter.md) outlines how to wire the connection
+between the Multi-Protocol Transmitter module and the Arduino
+Leonardo.
 
 | Part                                                                                                      | Cost |
 | --- | ---: |

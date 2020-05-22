@@ -56,7 +56,8 @@ it is possibly to use less expensive components and lower the cost to
 under $200.
 
 The complete hardware list can be found [here](docs/Hardware.md) with
-setup instructions [here](docs/NanoSetup.md).
+setup instructions [here](docs/NanoSetup.md) and
+[page](docs/Transmitter.md).
 
 While we will document how to purchase and set up the solution shown,
 we welcome any system that can fly a Tiny Whoop in a competition. The
